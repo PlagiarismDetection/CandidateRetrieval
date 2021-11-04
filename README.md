@@ -8,6 +8,6 @@ pip install underthesea
 pip install nltk  
 pip install tika  
 pip install scikit-learn  
-pip install underthesea 
+pip install underthesea   
 git clone https://github.com/PlagiarismDetection/PreProcessing.git  
 git clone https://github.com/PlagiarismDetection/Reader.git  
