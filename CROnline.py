@@ -36,12 +36,11 @@ class CROnline():
         # Use Preprocessing to sent to split each paragraph to list of sent.
         # Chunk has n sentences, if n/3 = 1 => last chunk has 4 sents, else chunking to 2 - 3 sentences.
         # Combine all sentences of a chunk to 1 string, filter if chunk has less than 100 character, and add to chunklist.
-        engPP = EngPreprocessing.EngPreprocessing()
         chunk_list = []
 
         for par in para_list:
             # Use Preprocessing to sent to split each paragraph to list of sent.
-            sent_list = engPP.preprocess2sent(par)
+            sent_list = EngPreprocessing.preprocess2sent(par)
 
             # Chunking each paragraph to many chunks of 2 - 4 sentences.
             chunks = [sent_list[i: i + 3] for i in range(0, len(sent_list), 3)]
@@ -67,8 +66,7 @@ class CROnline():
     def preprocess_chunk_list(chunk_list):
         # Preprocessing a chunk to remove stopword and punctuation.
         # Filtering chunk >= 10 word, word >= 4 and not contain special words.
-        engPP = EngPreprocessing.EngPreprocessing()
-        pp_chunk_list = [engPP.preprocess2word(chunk) for chunk in chunk_list]
+        pp_chunk_list = [EngPreprocessing.preprocess2word(chunk) for chunk in chunk_list]
         pp_chunk_list = [list(filter(lambda w: (len(w) >= 4) & (w not in ['date', 'time', 'http', 'https']) & (
             not w.startswith(r"//")), chunk)) for chunk in pp_chunk_list]
         pp_chunk_list = list(filter(lambda c: (len(c) >= 10), pp_chunk_list))
@@ -171,9 +169,8 @@ class CROnline():
 
     @staticmethod
     def snippet_based_checking_en(search_results, suspicious_doc_string, threshold=1):
-        preprocessing_en = EngPreprocessing.EngPreprocessing()
         # Check overlap on 5-grams on suspicious document and candidate document
-        sus_preprocessed = preprocessing_en.preprocess2word(
+        sus_preprocessed = EngPreprocessing.preprocess2word(
             suspicious_doc_string)
         sus_grams = ngrams(sus_preprocessed, 5)
         sus_grams = [' '.join(grams) for grams in sus_grams]
@@ -185,7 +182,7 @@ class CROnline():
         for candidate in search_results:
             if candidate['snippet'] == '':
                 continue
-            can_preprocessed = preprocessing_en.preprocess2word(
+            can_preprocessed = EngPreprocessing.preprocess2word(
                 candidate['snippet'])
             can_grams = ngrams(can_preprocessed, 5)
             can_grams = [' '.join(grams) for grams in can_grams]
@@ -199,9 +196,8 @@ class CROnline():
 
     @staticmethod
     def snippet_based_checking_vi(search_results, suspicious_doc_string, threshold=1):
-        preprocessing_vi = VnmPreprocessing.VnmPreprocessing()
         # Check overlap on 5-grams on suspicious document and candidate document
-        sus_preprocessed = preprocessing_vi.preprocess2word(
+        sus_preprocessed = VnmPreprocessing.preprocess2word(
             suspicious_doc_string)
         sus_grams = ngrams(sus_preprocessed, 5)
         sus_grams = [' '.join(grams) for grams in sus_grams]
@@ -213,7 +209,7 @@ class CROnline():
         for candidate in search_results:
             if candidate['snippet'] == '':
                 continue
-            can_preprocessed = preprocessing_vi.preprocess2word(
+            can_preprocessed = VnmPreprocessing.preprocess2word(
                 candidate['snippet'])
             can_grams = ngrams(can_preprocessed, 5)
             can_grams = [' '.join(grams) for grams in can_grams]
