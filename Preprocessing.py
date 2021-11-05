@@ -33,9 +33,17 @@ class WordPreprocessing(Preprocessing):
 
 class NonPreProcessing(Preprocessing):
     @staticmethod
-    def CollectionProcessing(collection):
-        return list(map(lambda item: item['Content'], collection))
+    def VieCollectionProcessing(collection):
+        return list(map(lambda item: VnmPreprocessing.tokenization(item['Content']), collection))
 
     @staticmethod
-    def FilesProcessing(files):
-        return list(map(lambda item: item.getContent(), files))
+    def EngCollectionProcessing(collection):
+        return list(map(lambda item: EngPreprocessing.tokenization(item['Content']), collection))
+
+    @staticmethod
+    def VieFilesProcessing(files):
+        return list(map(lambda item: VnmPreprocessing.tokenization(item.getContent()), files))
+
+    @staticmethod
+    def EngFilesProcessing(files):
+        return list(map(lambda item: EngPreprocessing.tokenization(item.getContent()), files))
