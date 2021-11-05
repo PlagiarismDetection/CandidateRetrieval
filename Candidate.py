@@ -28,10 +28,6 @@ class CandidateList(ABC):
         super().__init__()
         self.candidate_list = self.__getCandidateList(SM_List, collection)
 
-    def __del__(self):
-        for candidate in self.candidate_list:
-            del candidate
-
     def get_candidate_list(self):
         return self.candidate_list
 
