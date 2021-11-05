@@ -29,3 +29,13 @@ class WordPreprocessing(Preprocessing):
     @staticmethod
     def EngFilesProcessing(files):
         return list(map(lambda item: EngPreprocessing.preprocess2word(item.getContent()), files))
+
+
+class NonProcessing(Preprocessing):
+    @staticmethod
+    def CollectionProcessing(collection):
+        return list(map(lambda item: item['Content']), collection)
+
+    @staticmethod
+    def FilesProcessing(files):
+        return list(map(lambda item: item.getContent()), files)
