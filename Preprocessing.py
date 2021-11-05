@@ -34,8 +34,8 @@ class WordPreprocessing(Preprocessing):
 class NonPreProcessing(Preprocessing):
     @staticmethod
     def CollectionProcessing(collection):
-        return list(map(lambda item: item['Content']), collection)
+        return list(map(lambda item: item['Content'], collection))
 
     @staticmethod
     def FilesProcessing(files):
-        return list(map(lambda item: item.getContent()), files)
+        return list(map(lambda item: item.getContent(), files))
