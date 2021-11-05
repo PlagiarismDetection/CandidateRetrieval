@@ -31,7 +31,7 @@ class WordPreprocessing(Preprocessing):
         return list(map(lambda item: EngPreprocessing.preprocess2word(item.getContent()), files))
 
 
-class NonProcessing(Preprocessing):
+class NonPreProcessing(Preprocessing):
     @staticmethod
     def CollectionProcessing(collection):
         return list(map(lambda item: item['Content']), collection)
